@@ -1,0 +1,24 @@
+{
+  "name": "remitano",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/remitano/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "remitano:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "remitano:build:development"
+        },
+        "production": {
+          "buildTarget": "remitano:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
