@@ -34,7 +34,40 @@
       "options": {
         "targetName": "test"
       }
+    },
+    {
+      "plugin": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "previewTargetName": "preview",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "serveStaticTargetName": "serve-static"
+      }
+    },
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
     }
   ],
-  "nxCloudAccessToken": "NTFlMzkzNWUtZmFmMy00MWI4LTliNmUtOTZhNjkwOTA3ODlhfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "NTFlMzkzNWUtZmFmMy00MWI4LTliNmUtOTZhNjkwOTA3ODlhfHJlYWQtd3JpdGU=",
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "babel": true,
+        "style": "none",
+        "linter": "eslint",
+        "bundler": "vite"
+      },
+      "component": {
+        "style": "none"
+      },
+      "library": {
+        "style": "none",
+        "linter": "eslint"
+      }
+    }
+  }
 }
