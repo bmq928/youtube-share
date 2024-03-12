@@ -3,15 +3,6 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/frontend/src",
   "projectType": "application",
-  "targets": {
-    "serve": {
-      "executor": "@nx/vite:dev-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "frontend:build"
-      },
-      "configurations": {}
-    }
-  },
+  "targets": {},
   "tags": []
 }

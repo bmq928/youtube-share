@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - '5432:5432'
+    command: -c shared_buffers=500MB -c fsync=off
+    environment:
+      POSTGRES_USER: ${DB_USER:-pg}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-pg}
+      POSTGRES_DB: ${DB_DATABASE:-}
+    volumes:
+      - remi_pg:/var/lib/postgresql/data
+
+volumes:
+  remi_pg:
+    driver: local
