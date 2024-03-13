@@ -8,8 +8,13 @@ export default defineConfig({
   cacheDir: '../../node_modules/.vite/apps/frontend',
 
   server: {
-    port: 4200,
-    host: 'localhost',
+    port: parseInt(process.env['PORT'] as string),
+    host: process.env['HOST'] as string,
+    proxy: {
+      [process.env['BACKEND_BASE_PATH'] as string]: process.env[
+        'BACKEND_URL'
+      ] as string,
+    },
   },
 
   preview: {
