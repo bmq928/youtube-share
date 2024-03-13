@@ -5,6 +5,8 @@ import * as joi from 'joi'
 import { DataSourceOptions } from 'typeorm'
 import { AccountEntity, AccountsModule } from './accounts'
 import {
+  JWT_CONFIG_TOKEN,
+  JwtConfig,
   TYPEORM_CONFIG_TOKEN,
   baseConfig,
   baseConfigSchema,
@@ -16,6 +18,7 @@ import {
   typeormConfigSchema,
 } from './common'
 import { VideoEntity, VideosModule } from './videos'
+import { JwtModule } from '@nestjs/jwt'
 
 @Module({
   imports: [
@@ -37,6 +40,13 @@ import { VideoEntity, VideosModule } from './videos'
         entities: [AccountEntity, VideoEntity],
       }),
       inject: [ConfigService],
+    }),
+    JwtModule.registerAsync({
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<JwtConfig>(JWT_CONFIG_TOKEN).secret,
+      }),
+      inject: [ConfigService],
+      global: true,
     }),
   ],
 })

@@ -12,7 +12,6 @@ describe.each(['/accounts/login'])('[POST] %s', (baseUrl: string) => {
       request(testState.app?.getHttpServer())
         .post(baseUrl)
         .send({ email, password })
-        .expect(HttpStatus.CREATED)
         .expect(({ body }) =>
           expect(body).toMatchObject({
             token: expect.stringMatching(
@@ -20,6 +19,7 @@ describe.each(['/accounts/login'])('[POST] %s', (baseUrl: string) => {
             ),
           })
         )
+        .expect(HttpStatus.CREATED)
   )
 
   it.each(seedData.genFakeAccounts())(
@@ -28,11 +28,11 @@ describe.each(['/accounts/login'])('[POST] %s', (baseUrl: string) => {
       request(testState.app?.getHttpServer())
         .post(baseUrl)
         .send({ email, password })
-        .expect(HttpStatus.BAD_REQUEST)
         .expect(({ body }) =>
           expect(body).toMatchObject({
             message: 'email or password is wrong',
           })
         )
+        .expect(HttpStatus.BAD_REQUEST)
   )
 })

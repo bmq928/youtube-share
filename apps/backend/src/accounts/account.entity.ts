@@ -12,6 +12,8 @@ export class AccountEntity extends EntityPostgres {
   @Exclude()
   password: string
 
-  @OneToMany(() => VideoEntity, (v) => v.createdBy)
+  @OneToMany(() => VideoEntity, (v) => v.createdBy, {
+    createForeignKeyConstraints: false
+  })
   videos?: VideoEntity[]
 }

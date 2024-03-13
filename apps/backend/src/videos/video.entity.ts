@@ -7,6 +7,8 @@ export class VideoEntity extends BaseEntity {
   @Column()
   link: string
 
-  @ManyToOne(() => AccountEntity, (acc) => acc.videos)
+  @ManyToOne(() => AccountEntity, (acc) => acc.videos, {
+    createForeignKeyConstraints: false,
+  })
   createdBy?: AccountEntity
 }

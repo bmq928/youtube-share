@@ -1,3 +1,4 @@
+export * from './auth.guard'
 export * from './base.config'
 export * from './base.entity'
 export * from './jwt.config'

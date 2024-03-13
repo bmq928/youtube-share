@@ -11,7 +11,6 @@ describe.each(['/accounts/register'])('[POST] %s', (baseUrl: string) => {
       request(testState.app?.getHttpServer())
         .post(baseUrl)
         .send({ email, password })
-        .expect(HttpStatus.CREATED)
         .expect(({ body }) =>
           expect(body).toMatchObject({
             token: expect.stringMatching(
@@ -19,6 +18,7 @@ describe.each(['/accounts/register'])('[POST] %s', (baseUrl: string) => {
             ),
           })
         )
+        .expect(HttpStatus.CREATED)
   )
 
   it.each(seedData.accounts)(
@@ -27,11 +27,11 @@ describe.each(['/accounts/register'])('[POST] %s', (baseUrl: string) => {
       request(testState.app?.getHttpServer())
         .post(baseUrl)
         .send({ email, password })
-        .expect(HttpStatus.BAD_REQUEST)
         .expect(({ body }) =>
           expect(body).toMatchObject({
-            message: 'email is existed'
+            message: 'email is existed',
           })
         )
+        .expect(HttpStatus.BAD_REQUEST)
   )
 })

@@ -3,7 +3,7 @@ import { AccountEntity } from '../src/accounts'
 import { VideoEntity } from '../src/videos'
 import { PaginatedDto, SortEnum } from '../src/common'
 
-export const genFakeAccounts = (num = 12): AccountEntity[] =>
+export const genFakeAccounts = (num = 3): AccountEntity[] =>
   [...Array(num)].map(() => ({
     id: faker.string.uuid(),
     email: faker.internet.email(),
@@ -13,7 +13,7 @@ export const genFakeAccounts = (num = 12): AccountEntity[] =>
     videos: [],
   }))
 
-export const genFakeVideos = (num = 12): VideoEntity[] =>
+export const genFakeVideos = (num = 3): VideoEntity[] =>
   [...Array(num)].map(() => ({
     id: faker.string.uuid(),
     link: faker.internet.url(),
