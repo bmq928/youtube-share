@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import { AccountEntity, AccountsModule } from './accounts'
-import { VideoEntity, VideosModule } from './videos'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import * as joi from 'joi'
 import { DataSourceOptions } from 'typeorm'
+import { AccountEntity, AccountsModule } from './accounts'
 import {
   TYPEORM_CONFIG_TOKEN,
   baseConfig,
@@ -16,6 +15,7 @@ import {
   typeormConfig,
   typeormConfigSchema,
 } from './common'
+import { VideoEntity, VideosModule } from './videos'
 
 @Module({
   imports: [

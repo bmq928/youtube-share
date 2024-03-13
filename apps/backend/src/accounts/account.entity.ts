@@ -1,4 +1,5 @@
 import { Entity, Column, OneToMany } from 'typeorm'
+import { Exclude } from 'class-transformer'
 import { EntityPostgres } from '../common'
 import { VideoEntity } from '../videos'
 
@@ -8,6 +9,7 @@ export class AccountEntity extends EntityPostgres {
   email: string
 
   @Column()
+  @Exclude()
   password: string
 
   @OneToMany(() => VideoEntity, (v) => v.createdBy)

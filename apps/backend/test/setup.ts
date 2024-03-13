@@ -45,7 +45,9 @@ beforeEach(async () => {
     pbkdf2Iterations,
     pbkdf2KeyLens,
     pbkdf2Salt,
-  }: ConfigType<typeof pbkdf2Config> = (testState.app as INestApplication).get(pbkdf2Config.KEY)
+  }: ConfigType<typeof pbkdf2Config> = (testState.app as INestApplication).get(
+    pbkdf2Config.KEY
+  )
   await testState.ds?.getRepository(AccountEntity).insert(
     accounts.map(({ password, ...acc }) => ({
       ...acc,
