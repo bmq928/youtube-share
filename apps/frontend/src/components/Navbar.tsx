@@ -1,10 +1,10 @@
-export type NavbarProps = {
-  isLogin: boolean
-}
-export function Navbar({ isLogin }: NavbarProps) {
+import { Link } from '@tanstack/react-router'
+
+export function Navbar() {
+  const isLogin = false
   return (
     <nav className="flex border-b-[1px] border-b-black">
-      <div className="flex gap-2">
+      <Link className="flex gap-2" to="/">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={64}
@@ -32,19 +32,24 @@ export function Navbar({ isLogin }: NavbarProps) {
         <div className="flex justify-center items-center text-3xl">
           Funny Movies
         </div>
-      </div>
+      </Link>
       <div className="ml-auto flex">
         {isLogin ? (
           <div className="flex gap-3 items-center justify-center">
             <div>kame@email.com.vn</div>
-            <button className="px-4 border-[2px] border-black">Share a movie</button>
+            <button className="px-4 border-[2px] border-black">
+              <Link to="/share">Share a movie</Link>
+            </button>
             <button className="px-4 border-[2px] border-black">Logout</button>
           </div>
         ) : (
           <div className="flex gap-3 items-center justify-center">
-            <button className="px-4 border-[2px] border-black">Email</button>
-            <button className="px-4 border-[2px] border-black">Password</button>
-            <button className="px-4 border-[2px] border-black">Login / Register</button>
+            <button className="px-4 border-[2px] border-black">
+              <Link to="/login">Login</Link>
+            </button>
+            <button className="px-4 border-[2px] border-black">
+              <Link to="/register">Register</Link>
+            </button>
           </div>
         )}
       </div>
