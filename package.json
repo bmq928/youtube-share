@@ -2,7 +2,11 @@
   "name": "@remitano/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test:backend": "nx test backend -i",
+    "dev:backend": "nx serve backend",
+    "dev:frontend": "nx serve frontend"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^10.0.2",
