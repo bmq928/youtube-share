@@ -10,6 +10,10 @@ export function useLogout() {
     mutationFn: async () =>
       localStorage.removeItem(BEARER_TOKEN_LOCAL_STORAGE_KEY),
     onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [BEARER_TOKEN_QUERY_KEY] }),
+      setTimeout(
+        () =>
+          queryClient.invalidateQueries({ queryKey: [BEARER_TOKEN_QUERY_KEY] }),
+        10
+      ), // localstorage update is too slow, queryClient.invalidateQueries take effect faster => the query is wrong
   })
 }

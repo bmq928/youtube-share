@@ -1,5 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { BEARER_TOKEN_LOCAL_STORAGE_KEY, BEARER_TOKEN_QUERY_KEY } from './useBearerToken'
+import {
+  BEARER_TOKEN_LOCAL_STORAGE_KEY,
+  BEARER_TOKEN_QUERY_KEY,
+} from './useBearerToken'
 
 export type UseLoginProps = { email: string; password: string }
 export function useLogin() {
@@ -19,8 +22,19 @@ export function useLogin() {
       return respData
     },
     onSuccess: (data: { token: string }) => {
+      console.log({
+        data,
+        localStorage,
+        BEARER_TOKEN_LOCAL_STORAGE_KEY,
+        BEARER_TOKEN_QUERY_KEY,
+      })
       localStorage.setItem(BEARER_TOKEN_LOCAL_STORAGE_KEY, data.token)
-      queryClient.invalidateQueries({ queryKey: [BEARER_TOKEN_QUERY_KEY] })
+      // localstorage update is too slow, queryClient.invalidateQueries take effect faster => the query is wrong
+      setTimeout(
+        () =>
+          queryClient.invalidateQueries({ queryKey: [BEARER_TOKEN_QUERY_KEY] }),
+        10
+      )
     },
   })
 }
