@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
 import { VideoPreview } from '../components'
 import { Spinner } from '../components/Spinner'
 import { GetVideosResponse, useVideos } from '../hooks'
@@ -23,11 +23,11 @@ function Page() {
   return (
     <div className="px-10">
       <div className="py-10 px-40 flex gap-10 flex-col">
-        {videos?.map(({ link, createdBy }: GetVideosResponse) => (
+        {videos?.map(({ link, createdBy: { email } }: GetVideosResponse) => (
           <VideoPreview
             key={link}
             link={link}
-            createdBy={{ email: createdBy }}
+            createdBy={{ email }}
             like={0}
             dislike={0}
           />

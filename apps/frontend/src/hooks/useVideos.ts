@@ -5,7 +5,7 @@ export type GetVideosProps = {
   page?: number
   perPage?: number
 }
-export type GetVideosResponse = { createdBy: string; link: string }
+export type GetVideosResponse = { createdBy: { email: string }; link: string }
 export const VIDEOS_QUERY_KEY = 'VIDEOS_QUERY_KEY'
 export function useVideos({ page = 1, perPage = 10 }: GetVideosProps = {}) {
   const { data } = useBearerToken()

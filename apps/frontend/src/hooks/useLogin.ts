@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { setAuthToken } from '../utils'
+import { BEARER_TOKEN_QUERY_KEY } from './useBearerToken'
 
 export type UseLoginProps = { email: string; password: string }
 export function useLogin() {
@@ -20,6 +21,7 @@ export function useLogin() {
     },
     onSuccess: (data: { token: string }) => {
       setAuthToken(data.token)
+      queryClient.invalidateQueries({ queryKey: [BEARER_TOKEN_QUERY_KEY] })
     },
   })
 }
