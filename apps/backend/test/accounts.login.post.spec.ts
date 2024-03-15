@@ -4,6 +4,7 @@ import { testState } from './setup'
 import { AccountEntity } from '../src/accounts'
 import * as _ from 'lodash'
 import { HttpStatus } from '@nestjs/common'
+import { LoginDto } from '../src/accounts/accounts.dto'
 
 describe.each(['/accounts/login'])('[POST] %s', (baseUrl: string) => {
   it.each(seedData.accounts)(
@@ -31,6 +32,26 @@ describe.each(['/accounts/login'])('[POST] %s', (baseUrl: string) => {
         .expect(({ body }) =>
           expect(body).toMatchObject({
             message: 'email or password is wrong',
+          })
+        )
+        .expect(HttpStatus.BAD_REQUEST)
+  )
+
+  it.each([
+    { email: '', password: '!@#$ASDFzxcv123' },
+    { email: 'kame@joko.com', password: '' },
+    { email: 'kame@joko.com', password: 'asdflaksjf' },
+    { email: 'kame@joko.com', password: 'asdflak3434' },
+    { email: 'kame@joko.com', password: 'asdflaksjf' },
+  ] as LoginDto[])(
+    'should return bad request if dto is invalid \n%j',
+    ({ email, password }: LoginDto) =>
+      request(testState.app?.getHttpServer())
+        .post(baseUrl)
+        .send({ email, password })
+        .expect(({ body }) =>
+          expect(body).toMatchObject({
+            message: expect.arrayContaining([]),
           })
         )
         .expect(HttpStatus.BAD_REQUEST)

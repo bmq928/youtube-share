@@ -37,11 +37,11 @@ describe.each(['/videos'])('[GET] %s', (baseUrl: string) => {
     [...Array(3)].map(() =>
       seedData.genValidQuery<VideoEntity>({
         omitRandKeys: true,
-        sortByKeys: ['createdAt', 'createdBy', 'link'],
+        sortByKeys: ['createdAt', 'link'],
       })
     )
   )(
-    'should response a list of video with createdBy user attached to it if not logged in \n%j',
+    'should response a list of video with createdBy user attached to it if logged in \n%j',
     (q: Partial<PaginatedDto>) =>
       request(testState.app?.getHttpServer())
         .get(baseUrl)
