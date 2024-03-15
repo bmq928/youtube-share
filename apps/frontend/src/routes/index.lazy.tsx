@@ -1,25 +1,18 @@
-import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
+import { Navigate, createLazyFileRoute } from '@tanstack/react-router'
 import { VideoPreview } from '../components'
 import { Spinner } from '../components/Spinner'
-import { GetVideosResponse, useVideos } from '../hooks'
-import { isLoggedIn } from '../utils'
+import { GetVideosResponse, useBearerToken, useVideos } from '../hooks'
 
-export const Route = createFileRoute('/')({
+export const Route = createLazyFileRoute('/')({
   component: Page,
-  beforeLoad: () => {
-    if (!isLoggedIn())
-      throw redirect({
-        to: '/login',
-        search: {
-          redirect: window.location.href,
-        },
-      })
-  },
 })
 
 function Page() {
   const { data: videos, isLoading } = useVideos()
+  const { data: authData } = useBearerToken()
+
   if (isLoading) return <Spinner />
+  if (!authData?.token) return <Navigate to="/login" />
   return (
     <div className="px-10">
       <div className="py-10 px-40 flex gap-10 flex-col">

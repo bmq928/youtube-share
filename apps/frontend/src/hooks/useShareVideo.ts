@@ -11,6 +11,8 @@ export function useShareVideo() {
 
   return useMutation({
     mutationFn: async (body: UseShareVideoProps) => {
+      if (!data?.token) return
+
       const resp = await fetch('/api/v1/videos/share', {
         method: 'POST',
         body: JSON.stringify(body),

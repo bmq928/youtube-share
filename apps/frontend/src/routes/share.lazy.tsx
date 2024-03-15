@@ -1,24 +1,17 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { Navigate, createLazyFileRoute } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
-import { useShareVideo } from '../hooks'
-import { isLoggedIn } from '../utils'
+import { useBearerToken, useShareVideo } from '../hooks'
 
-export const Route = createFileRoute('/share')({
+export const Route = createLazyFileRoute('/share')({
   component: Page,
-  beforeLoad: () => {
-    if (!isLoggedIn())
-      throw redirect({
-        to: '/login',
-        search: {
-          redirect: window.location.href,
-        },
-      })
-  },
 })
 
 function Page() {
   const { register, handleSubmit } = useForm()
   const { mutate } = useShareVideo()
+  const { data: authData } = useBearerToken()
+
+  if (!authData?.token) return <Navigate to="/login" />
 
   return (
     <div className="px-10 flex w-full h-screen justify-center items-center flex-col gap-2">

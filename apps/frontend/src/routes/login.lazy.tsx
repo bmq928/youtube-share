@@ -1,18 +1,17 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { Navigate, createLazyFileRoute } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
-import { useRegister } from '../hooks'
-import { isLoggedIn } from '../utils'
+import { useBearerToken, useLogin } from '../hooks'
 
-export const Route = createFileRoute('/register')({
+export const Route = createLazyFileRoute('/login')({
   component: Page,
-  beforeLoad: () => {
-    if (isLoggedIn()) return redirect({ to: '/' })
-  },
 })
 
 function Page() {
   const { register, handleSubmit } = useForm()
-  const { mutate } = useRegister()
+  const { mutate } = useLogin()
+  const { data: authData } = useBearerToken()
+
+  if (authData?.token) return <Navigate to="/" />
 
   return (
     <div className="px-10 flex w-full h-screen justify-center items-center flex-col gap-2">
@@ -20,8 +19,8 @@ function Page() {
         className="border-[2px] border-black px-24 py-4 flex flex-col gap-3 rounded-lg"
         onSubmit={handleSubmit((data: any) => mutate(data))}
       >
-        <div className="translate-y-[-29px] translate-x-[-80px] bg-white text-center w-20 text-sm">
-          Register
+        <div className="translate-y-[-29px] translate-x-[-80px] bg-white text-center w-16 text-sm">
+          Login
         </div>
         <div className="flex gap-11">
           <label htmlFor="login-email" className="mr-[1px]">
@@ -44,7 +43,7 @@ function Page() {
           />
         </div>
         <button className="px-4 border-[2px] border-black" type="submit">
-          Register
+          Login
         </button>
       </form>
     </div>

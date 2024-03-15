@@ -13,6 +13,8 @@ export function useVideos({ page = 1, perPage = 10 }: GetVideosProps = {}) {
   return useQuery({
     queryKey: [VIDEOS_QUERY_KEY, { page, perPage }],
     queryFn: async () => {
+      if (!data?.token) return []
+
       const resp = await fetch(
         `/api/v1/videos?page=${page}&perPage=${perPage}`,
         {
