@@ -2,9 +2,12 @@ import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import * as joi from 'joi'
+import { ServeStaticModule } from '@nestjs/serve-static'
 import { DataSourceOptions } from 'typeorm'
 import { AccountEntity, AccountsModule } from './accounts'
 import {
+  BASE_CONFIG_TOKEN,
+  BaseConfig,
   JWT_CONFIG_TOKEN,
   JwtConfig,
   TYPEORM_CONFIG_TOKEN,
@@ -47,6 +50,19 @@ import { JwtModule } from '@nestjs/jwt'
       }),
       inject: [ConfigService],
       global: true,
+    }),
+    ServeStaticModule.forRootAsync({
+      useFactory: (configService: ConfigService) => [
+        {
+          rootPath:
+            configService.get<BaseConfig>(BASE_CONFIG_TOKEN).frontendDir,
+          exclude: [
+            `${configService.get<BaseConfig>(BASE_CONFIG_TOKEN).basePath}/(.*)`,
+          ],
+        },
+      ],
+      inject: [ConfigService],
+      isGlobal: true,
     }),
   ],
 })
