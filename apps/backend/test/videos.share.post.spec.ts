@@ -50,4 +50,25 @@ describe.each(['/videos/share'])('[POST] %s', (baseUrl: string) => {
           })
         )
   )
+
+  it.each([
+    { link: 'https://youtube.com/watch?v=dkajf' },
+    { link: 'dfl' },
+    { link: '' },
+  ])(
+    'should response bad request if link is a valid embed youtube link \n%j',
+    ({ link }) =>
+      request(testState.app?.getHttpServer())
+        .post(baseUrl)
+        .set('Authorization', `Bearer ${token}`)
+        .send({ link })
+        .expect(HttpStatus.BAD_REQUEST)
+        .expect(({ body }) =>
+          expect(body).toMatchObject({
+            message: [
+              'link must match /^https:\\/\\/www\\.youtube\\.com\\/embed\\/[a-zA-Z0-9]+$/g regular expression',
+            ],
+          })
+        )
+  )
 })

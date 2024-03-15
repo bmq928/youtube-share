@@ -1,6 +1,6 @@
-import { IsUrl } from 'class-validator'
+import { Matches } from 'class-validator'
 
 export class ShareVideoDto {
-  @IsUrl()
+  @Matches(/^https:\/\/www\.youtube\.com\/embed\/[a-zA-Z0-9]+$/g)
   link: string
 }

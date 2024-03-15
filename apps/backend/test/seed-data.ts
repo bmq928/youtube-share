@@ -16,7 +16,7 @@ export const genFakeAccounts = (num = 3): AccountEntity[] =>
 export const genFakeVideos = (num = 3): VideoEntity[] =>
   [...Array(num)].map(() => ({
     id: faker.string.uuid(),
-    link: faker.internet.url(),
+    link: `https://www.youtube.com/embed/${faker.string.alphanumeric(5)}`,
     createdAt: faker.date.past(),
     updatedAt: faker.date.future(),
   }))
