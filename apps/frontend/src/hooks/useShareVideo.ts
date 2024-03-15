@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { useBearerToken } from './useBearerToken'
+import { useLogout } from './useLogout'
 import { VIDEOS_QUERY_KEY } from './useVideos'
 
 export type UseShareVideoProps = {
@@ -8,6 +9,7 @@ export type UseShareVideoProps = {
 }
 export function useShareVideo() {
   const queryClient = useQueryClient()
+  const { mutate: logout } = useLogout()
   const { data } = useBearerToken()
 
   return useMutation({
@@ -23,7 +25,10 @@ export function useShareVideo() {
         },
       })
       const respData = await resp.json()
-      if (!resp.ok) throw new Error(respData.message)
+      if (!resp.ok) {
+        if (resp.status === 401) logout()
+        throw new Error(respData.message)
+      }
       return respData
     },
     onSuccess: () => {
