@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import { useBearerToken } from './useBearerToken'
 import { VIDEOS_QUERY_KEY } from './useVideos'
 
@@ -27,6 +28,9 @@ export function useShareVideo() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [VIDEOS_QUERY_KEY] })
+    },
+    onError: (err) => {
+      toast.error(err.message, { hideProgressBar: true })
     },
   })
 }

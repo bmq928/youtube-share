@@ -1,9 +1,10 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router'
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 import React, { Suspense } from 'react'
-import { Spinner } from '../components/Spinner'
+import { ToastContainer } from 'react-toastify'
 import { Navbar } from '../components'
+import { Spinner } from '../components/Spinner'
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'production'
@@ -23,6 +24,7 @@ export const Route = createRootRoute({
           <Navbar />
         </div>
         <Outlet />
+        <ToastContainer />
         <TanStackRouterDevtools />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

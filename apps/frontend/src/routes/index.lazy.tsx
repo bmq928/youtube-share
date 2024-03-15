@@ -1,4 +1,6 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { Navigate, createLazyFileRoute } from '@tanstack/react-router'
+import { useEffect } from 'react'
 import { VideoPreview } from '../components'
 import { Spinner } from '../components/Spinner'
 import {
@@ -8,8 +10,6 @@ import {
   useVideos,
   useWs,
 } from '../hooks'
-import { useEffect } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
 
 export const Route = createLazyFileRoute('/')({
   component: Page,

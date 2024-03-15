@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
 import {
   BEARER_TOKEN_LOCAL_STORAGE_KEY,
   BEARER_TOKEN_QUERY_KEY,
@@ -35,6 +36,9 @@ export function useLogin() {
           queryClient.invalidateQueries({ queryKey: [BEARER_TOKEN_QUERY_KEY] }),
         10
       )
+    },
+    onError: (err) => {
+      toast.error(err.message, { hideProgressBar: true })
     },
   })
 }
