@@ -41,9 +41,11 @@ export function Navbar() {
         {isLogin ? (
           <div className="flex gap-3 items-center justify-center">
             <div>kame@email.com.vn</div>
-            <button className="px-4 border-[2px] border-black">
-              <Link to="/share">Share a movie</Link>
-            </button>
+            <Link to="/share">
+              <button className="px-4 border-[2px] border-black">
+                Share a movie
+              </button>
+            </Link>
             <button
               className="px-4 border-[2px] border-black"
               onClick={() => logout()}
@@ -53,12 +55,14 @@ export function Navbar() {
           </div>
         ) : (
           <div className="flex gap-3 items-center justify-center">
-            <button className="px-4 border-[2px] border-black">
-              <Link to="/login">Login</Link>
-            </button>
-            <button className="px-4 border-[2px] border-black">
-              <Link to="/register">Register</Link>
-            </button>
+            <Link to="/login">
+              <button className="px-4 border-[2px] border-black">Login</button>
+            </Link>
+            <Link to="/register">
+              <button className="px-4 border-[2px] border-black">
+                Register
+              </button>
+            </Link>
           </div>
         )}
       </div>

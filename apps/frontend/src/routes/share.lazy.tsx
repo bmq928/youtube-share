@@ -1,4 +1,8 @@
-import { Navigate, createLazyFileRoute } from '@tanstack/react-router'
+import {
+  Navigate,
+  createLazyFileRoute,
+  useNavigate,
+} from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { useBearerToken, useShareVideo } from '../hooks'
 
@@ -10,6 +14,7 @@ function Page() {
   const { register, handleSubmit } = useForm()
   const { mutate } = useShareVideo()
   const { data: authData } = useBearerToken()
+  const navigate = useNavigate()
 
   if (!authData?.token) return <Navigate to="/login" />
 
@@ -17,7 +22,10 @@ function Page() {
     <div className="px-10 flex w-full h-screen justify-center items-center flex-col gap-2">
       <form
         className="border-[2px] border-black px-24 py-4 flex flex-col gap-3 rounded-lg"
-        onSubmit={handleSubmit((data: any) => mutate(data))}
+        onSubmit={handleSubmit((data: any) => {
+          mutate(data)
+          navigate({ to: '/' })
+        })}
       >
         <div className="translate-y-[-29px] translate-x-[-80px] bg-white text-center w-40 text-sm">
           Share a Youtube movie
