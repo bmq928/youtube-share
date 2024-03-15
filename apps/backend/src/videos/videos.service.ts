@@ -19,7 +19,7 @@ export class VideosService {
     sortBy,
   }: PaginatedDto): Promise<VideoEntity[]> {
     return this.videosRepo.find({
-      skip: page * perPage,
+      skip: (page - 1) * perPage,
       take: perPage,
       order: {
         [sortBy]: sort,

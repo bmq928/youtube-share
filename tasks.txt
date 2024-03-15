@@ -1,0 +1,7 @@
+add toast
+invalidate react-query (fix reload to get current state)
+handle error 401
+handle ws
+check testing
+  - add more backend
+  - write e2e frontend

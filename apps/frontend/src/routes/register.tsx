@@ -1,15 +1,27 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
+import { useForm } from 'react-hook-form'
+import { useRegister } from '../hooks'
+import { isLoggedIn } from '../utils'
 
-export const Route = createLazyFileRoute('/login')({
+export const Route = createFileRoute('/register')({
   component: Page,
+  beforeLoad: () => {
+    if (isLoggedIn()) return redirect({ to: '/' })
+  },
 })
 
 function Page() {
+  const { register, handleSubmit } = useForm()
+  const { mutate } = useRegister()
+
   return (
     <div className="px-10 flex w-full h-screen justify-center items-center flex-col gap-2">
-      <form className="border-[2px] border-black px-24 py-4 flex flex-col gap-3 rounded-lg">
-        <div className="translate-y-[-29px] translate-x-[-80px] bg-white text-center w-16 text-sm">
-          Login
+      <form
+        className="border-[2px] border-black px-24 py-4 flex flex-col gap-3 rounded-lg"
+        onSubmit={handleSubmit((data: any) => mutate(data))}
+      >
+        <div className="translate-y-[-29px] translate-x-[-80px] bg-white text-center w-20 text-sm">
+          Register
         </div>
         <div className="flex gap-11">
           <label htmlFor="login-email" className="mr-[1px]">
@@ -17,8 +29,9 @@ function Page() {
           </label>
           <input
             className="border-[1px] border-black rounded-sm"
-            type="text"
+            type="email"
             id="login-email"
+            {...register('email')}
           />
         </div>
         <div className="flex gap-4">
@@ -27,10 +40,11 @@ function Page() {
             className="border-[1px] border-black rounded-sm"
             type="password"
             id="login-password"
+            {...register('password')}
           />
         </div>
         <button className="px-4 border-[2px] border-black" type="submit">
-          Login
+          Register
         </button>
       </form>
     </div>

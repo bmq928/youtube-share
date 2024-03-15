@@ -1,7 +1,11 @@
 import { Link } from '@tanstack/react-router'
+import { useBearerToken } from '../hooks'
+import { useLogout } from '../hooks/useLogout'
 
 export function Navbar() {
-  const isLogin = false
+  const { data } = useBearerToken()
+  const { mutate: logout } = useLogout()
+  const isLogin = !!data?.token
   return (
     <nav className="flex border-b-[1px] border-b-black">
       <Link className="flex gap-2" to="/">
@@ -40,7 +44,12 @@ export function Navbar() {
             <button className="px-4 border-[2px] border-black">
               <Link to="/share">Share a movie</Link>
             </button>
-            <button className="px-4 border-[2px] border-black">Logout</button>
+            <button
+              className="px-4 border-[2px] border-black"
+              onClick={() => logout()}
+            >
+              Logout
+            </button>
           </div>
         ) : (
           <div className="flex gap-3 items-center justify-center">

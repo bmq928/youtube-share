@@ -1,6 +1,6 @@
 export type VideoPreviewProps = {
   link: string
-  createdBy: string
+  createdBy: { email: string }
   like: number
   dislike: number
 }
@@ -13,9 +13,9 @@ export function VideoPreview({
   return (
     <div className="flex">
       <iframe title={link} src={link} />
-      <div className="flex flex-col gap-4 px-10 py-2">
+      <div className="flex flex-col gap-4 px-10">
         <div className="text-xl">Shared by</div>
-        <div className="pl-3"> {createdBy}</div>
+        <div className=""> {createdBy.email}</div>
         <div className="flex gap-4">
           <div className="flex justify-center items-center gap-1">
             <svg
@@ -26,14 +26,14 @@ export function VideoPreview({
               xmlns="http://www.w3.org/2000/svg"
               // xmlns:xlink="http://www.w3.org/1999/xlink"
               viewBox="0 0 72 72"
-              enable-background="new 0 0 72 72"
+              enableBackground="new 0 0 72 72"
               // xml:space="preserve"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 {' '}
@@ -59,7 +59,7 @@ export function VideoPreview({
                 </g>{' '}
               </g>
             </svg>
-            <div>{dislike}</div>
+            <div>{like}</div>
           </div>
           <div className="flex justify-center items-center gap-1">
             <svg
@@ -70,14 +70,14 @@ export function VideoPreview({
               xmlns="http://www.w3.org/2000/svg"
               // xmlns:xlink="http://www.w3.org/1999/xlink"
               viewBox="0 0 72 72"
-              enable-background="new 0 0 72 72"
+              enableBackground="new 0 0 72 72"
               // xml:space="preserve"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 {' '}
