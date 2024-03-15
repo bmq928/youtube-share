@@ -1,7 +1,15 @@
 import { Navigate, createLazyFileRoute } from '@tanstack/react-router'
 import { VideoPreview } from '../components'
 import { Spinner } from '../components/Spinner'
-import { GetVideosResponse, useBearerToken, useVideos } from '../hooks'
+import {
+  GetVideosResponse,
+  VIDEOS_QUERY_KEY,
+  useBearerToken,
+  useVideos,
+  useWs,
+} from '../hooks'
+import { useEffect } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const Route = createLazyFileRoute('/')({
   component: Page,
@@ -10,6 +18,14 @@ export const Route = createLazyFileRoute('/')({
 function Page() {
   const { data: videos, isLoading } = useVideos()
   const { data: authData } = useBearerToken()
+  const { socket } = useWs()
+  const queryCLient = useQueryClient()
+
+  useEffect(() => {
+    socket.on('videos.shared', () =>
+      queryCLient.invalidateQueries({ queryKey: [VIDEOS_QUERY_KEY] })
+    )
+  }, [socket, queryCLient])
 
   if (isLoading) return <Spinner />
   if (!authData?.token) return <Navigate to="/login" />

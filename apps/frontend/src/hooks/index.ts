@@ -1,5 +1,6 @@
 export * from './useBearerToken'
 export * from './useLogin'
+export * from './useLogout'
 export * from './useRegister'
 export * from './useShareVideo'
 export * from './useVideos'
