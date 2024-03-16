@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "build:frontend": "nx build frontend",
+    "build:backend": "nx build backend",
+    "test:frontend": "nx test frontend -i",
     "test:backend": "nx test backend -i",
     "dev:backend": "nx serve backend",
     "dev:frontend": "nx serve frontend"
