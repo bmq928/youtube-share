@@ -4,6 +4,11 @@
   - Sharing YouTube videos
   - Viewing a list of shared videos (no need to display up/down votes)
   - Real-time notifications for new video shares: When a user shares a new video, other logged-in users should receive a real-time notification about the newly shared video. This notification can be displayed as a pop-up or a banner in the application, and it should contain the video title and the name of the user who shared it. 
+## Notes
+  - UI only display 10 latest videos for simplicity.
+  - Youtube links should be in this format https://www.youtube.com/embed/\<video-id\> 
+    - When you copy youtube link in browser, it should be some thing like this https://www.youtube.com/watch?v=\<video-id\> 
+    - Transform it to https://www.youtube.com/embed/\<video-id\> 
 # Prerequisites
 ## For developer
   - Nodejs (v18.14.0)
