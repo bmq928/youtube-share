@@ -35,7 +35,7 @@
   - docker compose up -d postgres
   - pnpm dev:frontend
   - pnpm dev:backend
-  - go to http://localhost:3001 in browser
+  - go to http://localhost:3000 in browser
 ## For one who just want to test out app  
   - docker compose up -d
   - go to http://localhost:3000 in browser

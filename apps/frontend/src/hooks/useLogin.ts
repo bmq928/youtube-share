@@ -23,12 +23,6 @@ export function useLogin() {
       return respData
     },
     onSuccess: (data: { token: string }) => {
-      console.log({
-        data,
-        localStorage,
-        BEARER_TOKEN_LOCAL_STORAGE_KEY,
-        BEARER_TOKEN_QUERY_KEY,
-      })
       localStorage.setItem(BEARER_TOKEN_LOCAL_STORAGE_KEY, data.token)
       // localstorage update is too slow, queryClient.invalidateQueries take effect faster => the query is wrong
       setTimeout(
