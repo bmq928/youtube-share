@@ -1,7 +1,11 @@
 X        add toast
 X        invalidate react-query (fix reload to get current state)
-        handle error 401
+X        handle error 401
 X        handle ws
+X        set up docker
+X        setup deployment
         check testing
           - add more backend
           - write e2e frontend
+        write README.md
+          - share video link with format
