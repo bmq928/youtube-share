@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { useBearerToken } from '../hooks'
-import { useLogout } from '../hooks/useLogout'
+import { useBearerToken, useLogout } from '../hooks'
 
 export function Navbar() {
   const { data } = useBearerToken()
@@ -40,7 +39,7 @@ export function Navbar() {
       <div className="ml-auto flex">
         {isLogin ? (
           <div className="flex gap-3 items-center justify-center">
-            <div>kame@email.com.vn</div>
+            <div>{data.email}</div>
             <Link to="/share">
               <button className="px-4 border-[2px] border-black">
                 Share a movie

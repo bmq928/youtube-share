@@ -33,13 +33,7 @@ function Page() {
     <div className="px-10">
       <div className="py-10 px-40 flex gap-10 flex-col">
         {videos?.map(({ link, createdBy: { email } }: GetVideosResponse) => (
-          <VideoPreview
-            key={link}
-            link={link}
-            createdBy={{ email }}
-            like={0}
-            dislike={0}
-          />
+          <VideoPreview key={link} link={link} createdBy={{ email }} />
         ))}
       </div>
     </div>

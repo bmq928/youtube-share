@@ -36,7 +36,7 @@ export class AccountsService {
 
     return {
       token: await this.jwtService.signAsync(
-        { id: founded.id },
+        { id: founded.id, email },
         {
           expiresIn: this.jwtEnv.accessTokenExpire,
           secret: this.jwtEnv.secret,
@@ -64,7 +64,7 @@ export class AccountsService {
 
     return {
       token: await this.jwtService.signAsync(
-        { id: created.id },
+        { id: created.id, email },
         {
           expiresIn: this.jwtEnv.accessTokenExpire,
           secret: this.jwtEnv.secret,
