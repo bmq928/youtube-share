@@ -18,5 +18,4 @@ FROM node:20-alpine
 WORKDIR /app
 COPY --from=build /app/dist/apps .
 COPY --from=prod-deps /app/node_modules ./node_modules
-EXPOSE 3000
 CMD [ "node", "backend/main.js" ]

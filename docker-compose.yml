@@ -1,6 +1,31 @@
 version: '3'
 
 services:
+  app:
+    image: app
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: '3000'
+      HOST: '0.0.0.0'
+      NODE_ENV: 'test'
+      BASE_PATH: '/api'
+      FRONTEND_DIR: ''
+      TYPEORM_TYPE: 'postgres'
+      TYPEORM_HOST: 'postgres'
+      TYPEORM_PORT: '5432'
+      TYPEORM_DATABASE: 'pg'
+      TYPEORM_USERNAME: 'pg'
+      TYPEORM_PASSWORD: 'pg'
+      TYPEORM_SCHEMA: 'public'
+      TYPEORM_LOGGER_LEVEL: 'debug'
+      TYPEORM_LOGGING: 'false'
+      TYPEORM_SYNCHRONIZE: 'true'
+      JWT_SECRET: 'kame'
+      JWT_ACCESS_TOKEN_EXPIRES_IN: '1h'
+      PBKDF2_SALT: 'salt'
+      
   postgres:
     image: postgres:15-alpine
     restart: always
